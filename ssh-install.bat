@@ -65,7 +65,7 @@ if /I "%BACKUP_CHOICE%"=="Y" (
     set /p BACKUP_PATH=<"%TEMP%\backup_path.txt"
     del "%TEMP%\backup_path.txt"
     
-    if not "!BACKUP_PATH!"=="" (
+    if defined BACKUP_PATH (
         if not exist "!BACKUP_PATH!" mkdir "!BACKUP_PATH!"
         echo Backup location set to: !BACKUP_PATH!
     ) else (
@@ -157,7 +157,7 @@ for /L %%i in (1,1,%NUM_KEYS%) do (
         echo Public key: !KEY_FILE!.pub
         
         REM Backup if location was specified
-        if not "!BACKUP_PATH!"=="" (
+        if defined BACKUP_PATH (
             copy "!KEY_FILE!" "!BACKUP_PATH!\" >nul
             copy "!KEY_FILE!.pub" "!BACKUP_PATH!\" >nul
             echo Keys backed up to !BACKUP_PATH!
@@ -208,8 +208,9 @@ if /I "%GPG_CHOICE%"=="Y" (
         echo To list your GPG keys, run: gpg --list-keys
         echo To export your public key, run: gpg --armor --export %USER_EMAIL% ^> pubkey.asc
         
-        if not "!BACKUP_PATH!"=="" (
+        if defined BACKUP_PATH (
             echo.
+            echo *** WARNING: Backing up private GPG keys. Ensure backup location is secure! ***
             echo Backing up GPG keys to !BACKUP_PATH!...
             gpg --export-secret-keys --armor %USER_EMAIL% > "!BACKUP_PATH!\gpg_private_key.asc" 2>nul
             gpg --export --armor %USER_EMAIL% > "!BACKUP_PATH!\gpg_public_key.asc" 2>nul
@@ -227,17 +228,17 @@ echo.
 echo Your SSH keys are located in: %USERPROFILE%\.ssh
 echo.
 echo To use your keys with SSH:
-echo   ssh -i "%USERPROFILE%\.ssh\id_[keytype]_[number]" user@host
+echo   ssh -i "%USERPROFILE%\.ssh\id_ed25519_1" user@host
 echo.
 echo To add your key to ssh-agent:
 echo   1. Start ssh-agent: ssh-agent
-echo   2. Add your key: ssh-add "%USERPROFILE%\.ssh\id_[keytype]_[number]"
+echo   2. Add your key: ssh-add "%USERPROFILE%\.ssh\id_ed25519_1"
 echo.
 echo To copy your public key:
-echo   type "%USERPROFILE%\.ssh\id_[keytype]_[number].pub"
+echo   type "%USERPROFILE%\.ssh\id_ed25519_1.pub"
 echo.
 
-if not "!BACKUP_PATH!"=="" (
+if defined BACKUP_PATH (
     echo Keys backed up to: !BACKUP_PATH!
     echo.
 )

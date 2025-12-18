@@ -260,6 +260,7 @@ EOF
         
         if [ -n "$BACKUP_PATH" ]; then
             echo ""
+            print_info "⚠️  WARNING: Backing up private GPG keys. Ensure backup location is secure!"
             print_info "Backing up GPG keys to $BACKUP_PATH..."
             gpg --export-secret-keys --armor "$USER_EMAIL" > "$BACKUP_PATH/gpg_private_key.asc" 2>/dev/null
             gpg --export --armor "$USER_EMAIL" > "$BACKUP_PATH/gpg_public_key.asc" 2>/dev/null
@@ -277,14 +278,14 @@ echo ""
 echo "Your SSH keys are located in: $SSH_DIR"
 echo ""
 echo "To use your keys with SSH:"
-echo "  ssh -i \"$SSH_DIR/id_[keytype]_[number]\" user@host"
+echo "  ssh -i \"$SSH_DIR/id_ed25519_1\" user@host"
 echo ""
 echo "To add your key to ssh-agent:"
 echo "  1. Start ssh-agent: eval \$(ssh-agent)"
-echo "  2. Add your key: ssh-add \"$SSH_DIR/id_[keytype]_[number]\""
+echo "  2. Add your key: ssh-add \"$SSH_DIR/id_ed25519_1\""
 echo ""
 echo "To copy your public key:"
-echo "  cat \"$SSH_DIR/id_[keytype]_[number].pub\""
+echo "  cat \"$SSH_DIR/id_ed25519_1.pub\""
 echo ""
 
 if [ -n "$BACKUP_PATH" ]; then
