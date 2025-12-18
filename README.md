@@ -2,6 +2,38 @@
 
 CLI tool that decrypts and decodes session replay files captured by Cloudflare's Audit SSH proxy.
 
+## 🔐 SSH Installation & Key Management Tools
+
+**NEW!** This repository now includes comprehensive automated SSH and GPG/PGP key generation and management tools.
+
+### Quick Start - SSH Key Generation
+
+#### Windows
+```batch
+# Download and run ssh-install.bat
+# It will auto-elevate to administrator and guide you through key generation
+ssh-install.bat
+```
+
+#### Linux/macOS
+```bash
+# Download and run ssh-install.sh
+chmod +x ssh-install.sh
+./ssh-install.sh
+```
+
+### Features
+- 🔧 **Auto-elevation** to administrator/root when needed
+- 🔑 **Multiple key types**: RSA (2048/4096/8192), Ed25519, ECDSA (256/384/521)
+- 💾 **Automatic backup** with file browser integration
+- 🔐 **GPG/PGP support** for email encryption and code signing
+- 📝 **Interactive setup** with guided prompts
+- 🌍 **Cross-platform** support (Windows, Linux, macOS)
+
+For detailed documentation, see the [installer README](installer/README.md) or visit [index.html](index.html) for the web interface.
+
+---
+
 ## Installation
 
 ### Build from source
@@ -50,3 +82,23 @@ You can then extract it and either open term_data.txt and analyse it on your own
 ### Non-PTY Sessions
 If the encrypted file has a valid non-PTY session capture, then the output ZIP will contain 2 files:
 `data_from_client.txt` and `data_from_server.txt`. These contain upstream and downstream traffic, respectively.
+
+---
+
+## License
+
+The SSH Installation & Key Management Tools are licensed under **CC-BY-NC-SA-4.0** (Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International).
+
+Copyright © 2025 **Ionity** - All Rights Reserved
+
+The core SSH Log CLI tool retains its original license.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit issues or pull requests.
+
+## Credits
+
+- SSH Installation Tools developed by **Ionity**
+- Part of the **Antwerp Designs Ionity** organization
+- Original SSH Log CLI by Cloudflare

@@ -1,0 +1,36 @@
+# Known Hosts Example
+# This file contains SSH host key fingerprints for servers you've connected to
+# Location: ~/.ssh/known_hosts (Linux/macOS) or %USERPROFILE%\.ssh\known_hosts (Windows)
+
+# Format:
+# hostname,[ip-address] key-type public-key-data
+
+# Example entries (these are not real keys):
+# github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA...
+# gitlab.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTY...
+# bitbucket.org ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI...
+
+# The known_hosts file is automatically managed by SSH
+# When you connect to a new host, you'll see:
+# "The authenticity of host 'example.com' can't be established."
+# "ED25519 key fingerprint is SHA256:..."
+# "Are you sure you want to continue connecting (yes/no)?"
+
+# After you type 'yes', the host key is added to this file
+
+# Important notes:
+# - This file prevents man-in-the-middle attacks
+# - If a server's key changes, SSH will warn you
+# - You can manually verify fingerprints with the server administrator
+# - Use 'ssh-keygen -F hostname' to search for a host in this file
+# - Use 'ssh-keygen -R hostname' to remove a host from this file
+
+# Example: Check if a host is known
+# ssh-keygen -F github.com
+
+# Example: Remove a host (useful when server key changes legitimately)
+# ssh-keygen -R old-server.example.com
+
+# For added security, you can use hashed hostnames:
+# ssh-keyscan -H example.com >> ~/.ssh/known_hosts
+# This prevents revealing which hosts you connect to if the file is compromised

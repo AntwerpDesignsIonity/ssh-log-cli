@@ -1,0 +1,84 @@
+# SSH Configuration Template
+# Save this file as 'config' in your .ssh directory
+# Location: ~/.ssh/config (Linux/macOS) or %USERPROFILE%\.ssh\config (Windows)
+
+# Default settings for all hosts
+Host *
+    # Use the SSH protocol version 2
+    Protocol 2
+    
+    # Enable compression
+    Compression yes
+    
+    # Keep connections alive
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+    
+    # Use SSH keys by default
+    PreferredAuthentications publickey,password
+    
+    # Disable strict host key checking for local networks (use with caution)
+    # StrictHostKeyChecking no
+    
+    # Forward agent for key-based authentication
+    ForwardAgent no
+    
+    # Enable connection multiplexing for faster subsequent connections
+    ControlMaster auto
+    ControlPath ~/.ssh/control-%r@%h:%p
+    ControlPersist 10m
+
+# Example: Development Server
+# Host dev
+#     HostName dev.example.com
+#     User username
+#     Port 22
+#     IdentityFile ~/.ssh/id_ed25519_1
+#     ForwardAgent yes
+
+# Example: Production Server
+# Host prod
+#     HostName prod.example.com
+#     User deploy
+#     Port 22
+#     IdentityFile ~/.ssh/id_rsa_4096_1
+#     StrictHostKeyChecking yes
+
+# Example: GitHub
+# Host github.com
+#     HostName github.com
+#     User git
+#     IdentityFile ~/.ssh/id_ed25519_github
+#     PreferredAuthentications publickey
+
+# Example: GitLab
+# Host gitlab.com
+#     HostName gitlab.com
+#     User git
+#     IdentityFile ~/.ssh/id_ed25519_gitlab
+#     PreferredAuthentications publickey
+
+# Example: Bitbucket
+# Host bitbucket.org
+#     HostName bitbucket.org
+#     User git
+#     IdentityFile ~/.ssh/id_ed25519_bitbucket
+#     PreferredAuthentications publickey
+
+# Example: Jump/Bastion Host
+# Host bastion
+#     HostName bastion.example.com
+#     User jump_user
+#     IdentityFile ~/.ssh/id_ed25519_1
+#
+# Host internal-server
+#     HostName 10.0.1.100
+#     User admin
+#     IdentityFile ~/.ssh/id_rsa_4096_1
+#     ProxyJump bastion
+
+# Example: Multiple servers with same configuration
+# Host server-*.example.com
+#     User admin
+#     IdentityFile ~/.ssh/id_ed25519_1
+#     Port 2222
