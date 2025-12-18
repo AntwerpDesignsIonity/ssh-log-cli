@@ -1,0 +1,44 @@
+# Authorized Keys Template
+# This file should be placed on the remote server at: ~/.ssh/authorized_keys
+# It contains public keys that are allowed to authenticate to this account
+
+# Format: Each line contains one public key
+# Lines starting with # are comments
+
+# Example entry (replace with your actual public key):
+# ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGExampleKeyDataHere user@example.com
+
+# To add your key to this file:
+# 1. Copy your public key from your local machine:
+#    Linux/macOS: cat ~/.ssh/id_ed25519_1.pub
+#    Windows: type %USERPROFILE%\.ssh\id_ed25519_1.pub
+#
+# 2. Paste it below this comment block
+#
+# 3. Save the file on the remote server as ~/.ssh/authorized_keys
+#
+# 4. Set correct permissions on the remote server:
+#    chmod 700 ~/.ssh
+#    chmod 600 ~/.ssh/authorized_keys
+
+# Add your public keys below:
+
+
+# You can add multiple keys, one per line:
+# ssh-ed25519 AAAAC3... user1@workstation
+# ssh-rsa AAAAB3... user2@laptop
+# ssh-ecdsa AAAAE2... user3@desktop
+
+# You can add restrictions before the key:
+# Options available:
+# - command="<command>": Force execution of a specific command
+# - no-port-forwarding: Disable port forwarding
+# - no-X11-forwarding: Disable X11 forwarding
+# - no-agent-forwarding: Disable agent forwarding
+# - no-pty: Disable PTY allocation
+# - from="<pattern>": Restrict source IP addresses
+
+# Example with restrictions:
+# no-port-forwarding,no-X11-forwarding ssh-ed25519 AAAAC3... restricted@example.com
+# from="192.168.1.*" ssh-ed25519 AAAAC3... local-network@example.com
+# command="~/backup.sh" ssh-ed25519 AAAAC3... backup@example.com
